@@ -12,9 +12,9 @@ Le projet Quest Creator pourrait être une application ou un outil en ligne qui 
 <!-- todo -->
 
 ## Contribution
-le codageur moralement et bonne ambiance ( en contribution )
-Lothereus pour avoir trouver l'idée
-Twidi pour le financement
-ZarTek-Creole pour sa patience.
-ANDREWDIGITAL pour la DA
-root9131 le stagiaine tjr la pour le café 
+- le codageur moralement et bonne ambiance ( en contribution )
+- Lothereus pour avoir trouver l'idée
+- Twidi pour le financement
+- ZarTek-Creole pour sa patience.
+- ANDREWDIGITAL pour la DA
+- root9131 le stagiaine tjr la pour le café <3
