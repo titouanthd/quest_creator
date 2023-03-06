@@ -46,8 +46,7 @@ class UserFixtures extends Fixture
             echo $adm->getUsername() . ' has been created succesfully !' . PHP_EOL;
         }
 
-
-        $count_user_to_create = 50;
+        $count_user_to_create = 3;
         for ($i = 1; $i <= $count_user_to_create; $i++) {
             $user = new User();
             // set user fields (email, username, password, created_at, updated_at, roles, last_connect)

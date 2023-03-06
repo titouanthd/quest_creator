@@ -10,6 +10,14 @@ Le projet Quest Creator est une application web / un outil en ligne qui permet a
 ## Ideas
 1. Chat GPT pour la génération des bio des PNJ & des quetes
 
+## Life cycle
+1. Création d'un univers
+  -> il nous faut un nom, un slug, user_id, created_at, updated_at, areas, seed
+2. Création des areas 
+  -> il nous faut un nom, un slug, user_id, biome, created_at, updated_at, universe_id, maps
+3. Création des maps
+  -> name, slug, x, y, user_id, area_id, created_at, updated_at
+
 ## Installation
 
 <!-- todo -->
