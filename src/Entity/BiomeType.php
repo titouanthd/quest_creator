@@ -21,7 +21,7 @@ class BiomeType
     #[ORM\Column(length: 255)]
     private ?string $slug = null;
 
-    #[ORM\OneToMany(mappedBy: 'type', targetEntity: Biome::class)]
+    #[ORM\OneToMany(mappedBy: 'biome_type', targetEntity: Biome::class)]
     private Collection $biomes;
 
     public function __construct()
@@ -70,7 +70,7 @@ class BiomeType
     {
         if (!$this->biomes->contains($biome)) {
             $this->biomes->add($biome);
-            $biome->setType($this);
+            $biome->setBiomeType($this);
         }
 
         return $this;
@@ -80,8 +80,8 @@ class BiomeType
     {
         if ($this->biomes->removeElement($biome)) {
             // set the owning side to null (unless already changed)
-            if ($biome->getType() === $this) {
-                $biome->setType(null);
+            if ($biome->getBiomeType() === $this) {
+                $biome->setBiomeType(null);
             }
         }
 

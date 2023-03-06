@@ -27,7 +27,7 @@ class Interaction
     private ?\DateTimeInterface $updated_at = null;
 
     #[ORM\ManyToOne(inversedBy: 'interactions')]
-    private ?InteractionType $type = null;
+    private ?InteractionType $interaction_type = null;
 
     #[ORM\ManyToOne(inversedBy: 'interactions')]
     private ?Map $map = null;
@@ -85,14 +85,14 @@ class Interaction
         return $this;
     }
 
-    public function getType(): ?InteractionType
+    public function getInteractionType(): ?InteractionType
     {
-        return $this->type;
+        return $this->interaction_type;
     }
 
-    public function setType(?InteractionType $type): self
+    public function setInteractionType(?InteractionType $interaction_type): self
     {
-        $this->type = $type;
+        $this->interaction_type = $interaction_type;
 
         return $this;
     }

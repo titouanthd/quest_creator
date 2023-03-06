@@ -21,7 +21,7 @@ class InteractionType
     #[ORM\Column(length: 255)]
     private ?string $slug = null;
 
-    #[ORM\OneToMany(mappedBy: 'type', targetEntity: Interaction::class)]
+    #[ORM\OneToMany(mappedBy: 'interaction_type', targetEntity: Interaction::class)]
     private Collection $interactions;
 
     public function __construct()
@@ -70,7 +70,7 @@ class InteractionType
     {
         if (!$this->interactions->contains($interaction)) {
             $this->interactions->add($interaction);
-            $interaction->setType($this);
+            $interaction->setInteractionType($this);
         }
 
         return $this;
@@ -80,8 +80,8 @@ class InteractionType
     {
         if ($this->interactions->removeElement($interaction)) {
             // set the owning side to null (unless already changed)
-            if ($interaction->getType() === $this) {
-                $interaction->setType(null);
+            if ($interaction->getInteractionType() === $this) {
+                $interaction->setInteractionType(null);
             }
         }
 

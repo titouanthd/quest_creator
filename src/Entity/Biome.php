@@ -22,17 +22,17 @@ class Biome
     #[ORM\Column(length: 255)]
     private ?string $slug = null;
 
-    #[ORM\OneToMany(mappedBy: 'biome', targetEntity: Area::class)]
-    private Collection $areas;
-
-    #[ORM\ManyToOne(inversedBy: 'biomes')]
-    private ?BiomeType $type = null;
-
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $updated_at = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $created_at = null;
+
+    #[ORM\ManyToOne(inversedBy: 'biomes')]
+    private ?BiomeType $biome_type = null;
+
+    #[ORM\OneToMany(mappedBy: 'biome', targetEntity: Area::class)]
+    private Collection $areas;
 
     public function __construct()
     {
@@ -92,6 +92,18 @@ class Biome
         return $this;
     }
 
+    public function getBiomeType(): ?BiomeType
+    {
+        return $this->biome_type;
+    }
+
+    public function setBiomeType(?BiomeType $biome_type): self
+    {
+        $this->biome_type = $biome_type;
+
+        return $this;
+    }
+
     /**
      * @return Collection<int, Area>
      */
@@ -118,18 +130,6 @@ class Biome
                 $area->setBiome(null);
             }
         }
-
-        return $this;
-    }
-
-    public function getType(): ?BiomeType
-    {
-        return $this->type;
-    }
-
-    public function setType(?BiomeType $type): self
-    {
-        $this->type = $type;
 
         return $this;
     }

@@ -21,21 +21,21 @@ class Area
 
     #[ORM\Column(length: 255)]
     private ?string $slug = null;
-
-    #[ORM\ManyToOne(inversedBy: 'areas')]
-    private ?Universe $universe = null;
-    
-    #[ORM\ManyToOne(inversedBy: 'areas')]
-    private ?Biome $biome = null;
-    
-    #[ORM\OneToMany(mappedBy: 'area', targetEntity: Map::class)]
-    private Collection $maps;
     
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $created_at = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $updated_at = null;
+
+    #[ORM\ManyToOne(inversedBy: 'areas')]
+    private ?Universe $universe = null;
+
+    #[ORM\OneToMany(mappedBy: 'area', targetEntity: Map::class)]
+    private Collection $maps;
+
+    #[ORM\ManyToOne(inversedBy: 'areas')]
+    private ?Biome $biome = null;
 
     public function __construct()
     {
@@ -71,18 +71,6 @@ class Area
         return $this;
     }
 
-    public function getUniverse(): ?Universe
-    {
-        return $this->universe;
-    }
-
-    public function setUniverse(?Universe $universe): self
-    {
-        $this->universe = $universe;
-
-        return $this;
-    }
-
     public function getCreatedAt(): ?\DateTimeInterface
     {
         return $this->created_at;
@@ -107,14 +95,14 @@ class Area
         return $this;
     }
 
-    public function getBiome(): ?Biome
+    public function getUniverse(): ?Universe
     {
-        return $this->biome;
+        return $this->universe;
     }
 
-    public function setBiome(?Biome $biome): self
+    public function setUniverse(?Universe $universe): self
     {
-        $this->biome = $biome;
+        $this->universe = $universe;
 
         return $this;
     }
@@ -145,6 +133,18 @@ class Area
                 $map->setArea(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getBiome(): ?Biome
+    {
+        return $this->biome;
+    }
+
+    public function setBiome(?Biome $biome): self
+    {
+        $this->biome = $biome;
 
         return $this;
     }

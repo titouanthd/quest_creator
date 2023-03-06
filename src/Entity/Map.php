@@ -22,23 +22,23 @@ class Map
     #[ORM\Column(length: 255)]
     private ?string $slug = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $x = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $y = null;
-
-    #[ORM\ManyToOne(inversedBy: 'maps')]
-    private ?Area $area = null;
-
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $created_at = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $updated_at = null;
 
+    #[ORM\ManyToOne(inversedBy: 'maps')]
+    private ?Area $area = null;
+
     #[ORM\OneToMany(mappedBy: 'map', targetEntity: Interaction::class)]
     private Collection $interactions;
+
+    #[ORM\Column]
+    private ?int $x = null;
+
+    #[ORM\Column]
+    private ?int $y = null;
 
     public function __construct()
     {
@@ -70,30 +70,6 @@ class Map
     public function setSlug(string $slug): self
     {
         $this->slug = $slug;
-
-        return $this;
-    }
-
-    public function getX(): ?string
-    {
-        return $this->x;
-    }
-
-    public function setX(string $x): self
-    {
-        $this->x = $x;
-
-        return $this;
-    }
-
-    public function getY(): ?string
-    {
-        return $this->y;
-    }
-
-    public function setY(string $y): self
-    {
-        $this->y = $y;
 
         return $this;
     }
@@ -160,6 +136,30 @@ class Map
                 $interaction->setMap(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getX(): ?int
+    {
+        return $this->x;
+    }
+
+    public function setX(int $x): self
+    {
+        $this->x = $x;
+
+        return $this;
+    }
+
+    public function getY(): ?int
+    {
+        return $this->y;
+    }
+
+    public function setY(int $y): self
+    {
+        $this->y = $y;
 
         return $this;
     }

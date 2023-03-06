@@ -31,11 +31,11 @@ class Universe
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $updated_at = null;
 
-    #[ORM\OneToMany(mappedBy: 'universe', targetEntity: Area::class)]
-    private Collection $areas;
-
     #[ORM\Column(length: 255)]
     private ?string $seed = null;
+
+    #[ORM\OneToMany(mappedBy: 'universe', targetEntity: Area::class)]
+    private Collection $areas;
 
     public function __construct()
     {
@@ -106,6 +106,17 @@ class Universe
 
         return $this;
     }
+    public function getSeed(): ?string
+    {
+        return $this->seed;
+    }
+
+    public function setSeed(string $seed): self
+    {
+        $this->seed = $seed;
+
+        return $this;
+    }
 
     /**
      * @return Collection<int, Area>
@@ -133,18 +144,6 @@ class Universe
                 $area->setUniverse(null);
             }
         }
-
-        return $this;
-    }
-
-    public function getSeed(): ?string
-    {
-        return $this->seed;
-    }
-
-    public function setSeed(string $seed): self
-    {
-        $this->seed = $seed;
 
         return $this;
     }
