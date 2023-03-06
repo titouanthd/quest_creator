@@ -12,17 +12,7 @@ class DefaultController extends AbstractController
     public function home(): Response
     {
         return $this->render('front/default/home.html.twig', [
-            'controller_name' => 'DefaultController',
-            'page_title' => 'Home page'
-        ]);
-    }
-
-    #[Route('/admin', name: 'app_front_admin')]
-    public function admin(): Response
-    {
-        return $this->render('front/default/home.html.twig', [
-            'controller_name' => 'DefaultController',
-            'page_title' => 'Home page'
+            'controller_name' => 'DefaultController'
         ]);
     }
 }
