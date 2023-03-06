@@ -68,8 +68,8 @@ Vous pouvez introduire une issue sur [github](https://github.com/titouanthd/ques
 ## Contribution
 
 - Le codageur moralement et bonne ambiance <3
-- Lothereus pour avoir trouver l'idée du projet et pour son soutien
-- @[Twidi](https://github.com/Twidi) pour le financement
+- @[Lothereus](https://github.com/lothereus) pour avoir trouver l'idée du projet et pour son soutien <3
+- @[Twidi](https://github.com/Twidi) pour le financement <3
 - @[ZarTek-Creole](https://github.com/ZarTek-Creole) pour sa patience et son soutien <3
 - ANDREWDIGITAL pour la DA et le logo <3
 - root9131 le stagiaire toujours la pour le café et le soutien <3
