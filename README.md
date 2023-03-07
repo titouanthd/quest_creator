@@ -29,6 +29,15 @@ L'idée à été trouvé par Lothereus et ma communauté que j'ai sur Twitch, je
   6. Génération de monde
   7. Génération de quête
 
+- Utiliser MidJourney
+  1. Pour générer des avatars pour les personnages (Player/NPC)
+  2. Pour générer les images des items/batiments...
+
+- Mettre en place un service de génération procédurale de carte
+  1. Prend en comtpe des biomes
+  2. Des points d'înterets (ville, village, donjon...)
+  3. Prend en compte des ressources (chasse, récolte)
+
 ## Life cycle
 
 1. Création d'un univers

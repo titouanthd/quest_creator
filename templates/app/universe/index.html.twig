@@ -1,0 +1,34 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title %}App | Universes index{% endblock %}
+
+{% block body %}
+<h1>Universes index</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>{{ knp_pagination_sortable(pagination, 'Id', 'u.id') }}</th>
+            <th>{{ knp_pagination_sortable(pagination, 'Name', 'u.name') }}</th>
+            <th>actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for universe in pagination %}
+        <tr>
+            <td>{{ universe.id }}</td>
+            <td>{{ universe.name }}</td>
+            <td>
+                {# <a href="{{ path('app_biomes_show', {'id': biome.id}) }}">show</a>
+                <a href="{{ path('app_biomes_edit', {'id': biome.id}) }}">edit</a> #}
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+{# display navigation #}
+<div class="navigation">
+    {{ knp_pagination_render(pagination) }}
+</div>
+{% endblock %}

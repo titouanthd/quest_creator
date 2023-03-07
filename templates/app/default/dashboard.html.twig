@@ -1,7 +1,9 @@
 {% extends 'layouts/base.html.twig' %}
 
-{% block title %}App Dashboard{% endblock %}
+{% block title %}App | Dashboard{% endblock %}
 
 {% block body %}
 <h1>App Dashboard</h1>
+{# add link for universes index page #}
+<a href="{{ path('app_universe_index', {id: app.user.id}) }}">Universes</a>
 {% endblock %}
