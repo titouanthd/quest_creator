@@ -2,6 +2,7 @@
 
 namespace App\Controller\App;
 
+use OpenAIService;
 use App\Entity\User;
 use App\Entity\Universe;
 use App\Form\UniverseType;
@@ -11,13 +12,18 @@ use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Contracts\HttpClient\HttpClientInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+
 
 class UniverseController extends AbstractController
 {
     #[Route('/app/{id}/universe/index', name: 'app_universe_index')]
-    public function index(User $user, EntityManagerInterface $em, PaginatorInterface $paginator, Request $request): Response
+    public function index(User $user, EntityManagerInterface $em, PaginatorInterface $paginator, Request $request, HttpClientInterface $client): Response
     {
+        $open_ai_service = new OpenAIService($client);
+        $open_ai_service->sendRequestToOpenAI("What's the best way to learn Symfony?");
+
         $this->denyAccessUnlessGranted('ACCESS_APP', $user);
 
         $dql = "SELECT b FROM App\Entity\Universe b WHERE b.user = :user ORDER BY b.id DESC";
