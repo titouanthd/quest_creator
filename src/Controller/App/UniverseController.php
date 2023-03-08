@@ -19,11 +19,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class UniverseController extends AbstractController
 {
     #[Route('/app/{id}/universe/index', name: 'app_universe_index')]
-    public function index(User $user, EntityManagerInterface $em, PaginatorInterface $paginator, Request $request, HttpClientInterface $client): Response
+    public function index(User $user, EntityManagerInterface $em, PaginatorInterface $paginator, Request $request): Response
     {
-        $open_ai_service = new OpenAIService($client);
-        $open_ai_service->sendRequestToOpenAI("What's the best way to learn Symfony?");
-
         $this->denyAccessUnlessGranted('ACCESS_APP', $user);
 
         $dql = "SELECT b FROM App\Entity\Universe b WHERE b.user = :user ORDER BY b.id DESC";
@@ -42,8 +39,10 @@ class UniverseController extends AbstractController
     }
 
     #[Route('/app/{id}/universe/create', name: 'app_universe_create')]
-    public function create(User $user, EntityManagerInterface $em, Request $request): Response
+    public function create(User $user, EntityManagerInterface $em, Request $request, HttpClientInterface $client): Response
     {
+        $open_ai_service = new OpenAIService($client);
+
         $this->denyAccessUnlessGranted('ACCESS_APP', $user);
 
         $universe = new Universe();
@@ -56,6 +55,10 @@ class UniverseController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $prompt = "Could you tell me how to learn Symfony?";
+            $context = "I am a beginner in Symfony and I want to learn it.";
+            $open_ai_service->sendRequestToOpenAI($prompt, $context);
+
             $em->persist($universe);
             $em->flush();
 

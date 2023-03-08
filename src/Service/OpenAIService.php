@@ -5,7 +5,7 @@
 // use Symfony\Component\HttpFoundation\Response;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
-class OpenAIService 
+class OpenAIService
 {
   private $client;
 
@@ -14,28 +14,50 @@ class OpenAIService
   {
     $this->client = $client;
   }
-
-  public function sendRequestToOpenAI(string $prompt): array
+  
+  /**
+   * sendRequestToOpenAI
+   *
+   * @param  string $prompt
+   * @param  string $context
+   * @return string
+   */
+  public function sendRequestToOpenAI(string $prompt, string $context): string
   {
-    $base_prompt = "Ignore all instructions before this one. ";
+    $base_prompt = "";
     $prompt = $base_prompt . $prompt;
 
+    $post_fields = array(
+      "model" => "gpt-3.5-turbo",
+      "messages" => array(
+        array(
+          "role" => "system",
+          "content" => $context,
+        ),
+        array(
+          "role" => "user",
+          "content" => $prompt
+        )
+      ),
+      "temperature" => 0
+    );
+
     $response = $this->client->request(
-      "POST", 
-      "https://api.openai.com/v1/engines/davinci/completions",
+      "POST",
+      "https://api.openai.com/v1/chat/completions",
       [
         "headers" => [
           'Authorization' => 'Bearer ' . $_ENV['OPENAI_API_KEY'],
         ],
-        "json" => [
-          "prompt" => $prompt,
-          "temperature" => 0.9       
-        ],
+        "json" => $post_fields
       ]
     );
 
-    dd($response->toArray()['choices'][0]['text']);
-
-    return $response->toArray();
+    // check if the response is successful
+    if ($response->getStatusCode() === 200) {
+      return $response->toArray()['choices'][0]['message']['content'];
+    } else {
+      throw new \Exception("Error Processing Request", 1);
+    }
   }
 }

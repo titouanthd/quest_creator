@@ -15,11 +15,13 @@ class UniverseFixtures extends Fixture implements DependentFixtureInterface
             "name" => "Universe 1",
             "slug" => "universe-1",
             "seed" => "123456789",
+            "description" => "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nisl vitae ultricies lacinia, nisl nisl aliquet nisl, eget ali",
         ],
         [
             "name" => "Universe 2",
             "slug" => "universe-2",
             "seed" => "987654321",
+            "description" => "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nisl vitae ultricies lacinia, nisl nisl aliquet nisl, eget ali",
         ]
     ];
 
@@ -36,6 +38,7 @@ class UniverseFixtures extends Fixture implements DependentFixtureInterface
             $new_universe->setName($u['name']);
             $new_universe->setSlug($u['slug']);
             $new_universe->setSeed($u['seed']);
+            $new_universe->setDescription($u['description']);
             // choose a random user
             $user = $users[rand(0, count($users) - 1)];
             $new_universe->setUser($user);

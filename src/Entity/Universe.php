@@ -37,6 +37,9 @@ class Universe
     #[ORM\OneToMany(mappedBy: 'universe', targetEntity: Area::class)]
     private Collection $areas;
 
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $description = null;
+
     public function __construct()
     {
         $this->areas = new ArrayCollection();
@@ -144,6 +147,18 @@ class Universe
                 $area->setUniverse(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description): self
+    {
+        $this->description = $description;
 
         return $this;
     }
