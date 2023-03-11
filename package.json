@@ -6,11 +6,15 @@
         "@symfony/stimulus-bridge": "^3.2.0",
         "@symfony/ux-autocomplete": "file:vendor/symfony/ux-autocomplete/assets",
         "@symfony/webpack-encore": "^4.0.0",
+        "autoprefixer": "^10.4.14",
         "bootstrap-icons": "^1.10.3",
         "core-js": "^3.23.0",
+        "postcss": "^8.4.21",
+        "postcss-loader": "^7.0.2",
         "regenerator-runtime": "^0.13.9",
         "sass": "^1.58.3",
         "sass-loader": "^13.2.0",
+        "tailwindcss": "^3.2.7",
         "tom-select": "^2.2.2",
         "webpack": "^5.74.0",
         "webpack-cli": "^4.10.0",
@@ -23,8 +27,5 @@
         "dev": "encore dev",
         "watch": "encore dev --watch",
         "build": "encore production --progress"
-    },
-    "dependencies": {
-        "bootstrap": "^5.2.3"
     }
 }

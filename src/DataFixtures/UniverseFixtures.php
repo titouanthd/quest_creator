@@ -22,7 +22,19 @@ class UniverseFixtures extends Fixture implements DependentFixtureInterface
             "slug" => "universe-2",
             "seed" => "987654321",
             "description" => "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nisl vitae ultricies lacinia, nisl nisl aliquet nisl, eget ali",
-        ]
+        ],
+        [
+            "name" => "Universe 3",
+            "slug" => "universe-3",
+            "seed" => "987654321",
+            "description" => "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nisl vitae ultricies lacinia, nisl nisl aliquet nisl, eget ali",
+        ],
+        [
+            "name" => "Universe 4",
+            "slug" => "universe-4",
+            "seed" => "987654321",
+            "description" => "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nisl vitae ultricies lacinia, nisl nisl aliquet nisl, eget ali",
+        ],
     ];
 
     public function load(ObjectManager $manager): void

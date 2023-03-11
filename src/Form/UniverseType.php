@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
@@ -41,7 +42,14 @@ class UniverseType extends AbstractType
                 'attr' => [
                     'placeholder' => 'Seed'
                 ]
-            ]);
+            ])
+            ->add('description', TextareaType::class, [
+                'label' => 'Description',
+                'attr' => [
+                    'placeholder' => 'Description'
+                ]
+            ])
+        ;
 
         // add event listener to show or hide the user field
         $builder->addEventListener(
@@ -53,6 +61,7 @@ class UniverseType extends AbstractType
     public function onPreSetData(FormEvent $event)
     {
         $request = $this->requestStack->getCurrentRequest();
+        $route = $request->attributes->get('_route');
 
         if ($this->authorizationChecker->isGranted('ROLE_ADMIN') === true) {
             // If the user is an admin we can display the user field
@@ -65,6 +74,25 @@ class UniverseType extends AbstractType
                 ]
             ]);
         }
+
+
+        // if route is the edit route we can display the user field
+        if ($route === 'app_universe_edit') {
+            $event->getForm()->add('user', UserAutocompleteField::class);
+            // add created at
+            $event->getForm()->add('createdAt', DateTimeType::class, [
+                'label' => 'Created At',
+                'widget' => 'single_text',
+                'attr' => [
+                    'placeholder' => 'Created At',
+                    'readonly' => true
+                ]
+            ]);
+        }
+
+
+
+
     }
 
     public function configureOptions(OptionsResolver $resolver): void

@@ -53,6 +53,8 @@ class OpenAIService
       ]
     );
 
+    dd($response->toArray());
+
     // check if the response is successful
     if ($response->getStatusCode() === 200) {
       return $response->toArray()['choices'][0]['message']['content'];

@@ -5,6 +5,10 @@
 {% block body %}
 <h1>Universes index</h1>
 
+<div>
+    <a class="btn btn-sm btn-success" href="{{ path('app_universe_create', {user_id: app.user.id})}}">Add universe</a>
+</div>
+
 <table class="table">
     <thead>
         <tr>
@@ -19,8 +23,8 @@
             <td>{{ universe.id }}</td>
             <td>{{ universe.name }}</td>
             <td>
-                {# <a href="{{ path('app_biomes_show', {'id': biome.id}) }}">show</a>
-                <a href="{{ path('app_biomes_edit', {'id': biome.id}) }}">edit</a> #}
+                <a href="{{path('app_universe_edit', {user_id: universe.user.id, universe_id: universe.id})}}">edit</a>
+                <a href="{{path('app_universe_delete', {user_id: universe.user.id, universe_id: universe.id})}}">delete</a>
             </td>
         </tr>
     {% endfor %}
