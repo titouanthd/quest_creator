@@ -1,58 +1,44 @@
 {% extends 'layouts/base.html.twig' %}
 
-{% block title %}Log in!
+{% block title %}Login
 {% endblock %}
 
 {% block body %}
-<div>
-    <div>
-        <div>
-            <div>
-                <form method="post">
-                    <div>
-                        {# error alert #}
-                        {% if error %}
-                            <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-                        {% endif %}
-
-                        {# info alert #}
-                        {% if app.user %}
-                            <div>
-                                You are logged in as
-                                {{ app.user.userIdentifier }},
-                                <a href="{{ path('app_logout') }}">Logout</a> or
-                                <a href="{{ path('app_default_dashboard', {user_id: app.user.id}) }}">Access to app</a>
+<div class="container">
+    <div class="row vh-100 align-items-center justify-content-center">
+        <div class="col-12 col-md-6 col-lg-5">
+            {% include "parts/_alerts.html.twig" %}
+            <div class="card">
+                <div class="card-header">
+                    <h1 class="card-title">Login</h1>
+                </div>
+                <div class="card-body">
+                    <form method="POST" action="{{ path('app_login') }}">
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                        <div class="mb-3">
+                            <label for="inputEmail" class="form-label">Email address</label>
+                            <input type="email" class="form-control" id="inputEmail" name="_username" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="inputPassword" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="inputPassword" name="_password" required>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="_remember_mem_switch" name="_remember_me">
+                                    <label class="form-check-label" for="_remember_mem_switch">Remember me</label>
+                                </div>
                             </div>
-                        {% endif %}
-                    </div>
-
-                    <h1>Please sign in</h1>
-                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-
-                    <div>
-                        <label for="inputEmail">Email</label>
-                        <input type="email" value="{{ last_username }}" name="email" id="inputEmail" autocomplete="email" required autofocus>
-                    </div>
-                    <div class="mb-3">
-                        <label for="inputPassword">Password</label>
-                        <input type="password" name="password" id="inputPassword" autocomplete="current-password" required>
-                    </div>
-
-                    <div>
-                        <div>
-                            <div>
-                                <input class="form-check-input" type="checkbox" id="remember-me" name="_remember_me">
-                                <label class="form-check-label" for="remember-me">Remember me</label>
+                            <div class="col-auto">
+                                <button type="submit" class="btn btn-sm btn-primary">Login</button>
                             </div>
                         </div>
-                        <div>
-                            <button type="submit">
-                                Sign in
-                            </button>
-                        </div>
-                    </div>
-
-                </form>
+                    </form>
+                </div>
+                <div class="card-footer">
+                    <a href="#">Forgot Password?</a>
+                </div>
             </div>
         </div>
     </div>

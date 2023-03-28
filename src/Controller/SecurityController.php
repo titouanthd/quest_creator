@@ -12,12 +12,20 @@ class SecurityController extends AbstractController
     #[Route(path: '/login', name: 'app_login')]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
-        // if ($this->getUser()) {
-        //     return $this->redirectToRoute('target_path');
-        // }
+        if ($this->getUser()) {
+            // add flash message
+            $logout_url = $this->generateUrl('app_logout');
+            $admin_url = $this->generateUrl('app_admin');
+            $this->addFlash('info', 'You are already logged in! <a href="'.$logout_url.'">Logout</a> or <a href="'.$admin_url.'">access the dashboard</a>');
+        }
 
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
+
+        if ($error) {
+            $this->addFlash('danger', $error->getMessage());
+        }
+
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
 

@@ -3,8 +3,6 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -36,19 +34,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $created_at = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $updated_at = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $last_connect = null;
-
-    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Universe::class)]
-    private Collection $universes;
-
-    public function __construct()
-    {
-        $this->universes = new ArrayCollection();
-    }
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $avatar_url = null;
 
     public function getId(): ?int
     {
@@ -149,55 +139,28 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->updated_at;
     }
 
-    public function setUpdatedAt(\DateTimeInterface $updated_at): self
+    public function setUpdatedAt(?\DateTimeInterface $updated_at): self
     {
         $this->updated_at = $updated_at;
 
         return $this;
     }
 
-    public function getLastConnect(): ?\DateTimeInterface
+    public function getAvatarUrl(): ?string
     {
-        return $this->last_connect;
+        return $this->avatar_url;
     }
 
-    public function setLastConnect(?\DateTimeInterface $last_connect): self
+    public function setAvatarUrl(?string $avatar_url): self
     {
-        $this->last_connect = $last_connect;
+        $this->avatar_url = $avatar_url;
 
         return $this;
     }
 
     /**
-     * @return Collection<int, Universe>
+     * isAdmin checks if the user is an admin
      */
-    public function getUniverses(): Collection
-    {
-        return $this->universes;
-    }
-
-    public function addUniverse(Universe $universe): self
-    {
-        if (!$this->universes->contains($universe)) {
-            $this->universes->add($universe);
-            $universe->setUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeUniverse(Universe $universe): self
-    {
-        if ($this->universes->removeElement($universe)) {
-            // set the owning side to null (unless already changed)
-            if ($universe->getUser() === $this) {
-                $universe->setUser(null);
-            }
-        }
-
-        return $this;
-    }
-
     public function isAdmin(): bool
     {
         return in_array('ROLE_ADMIN', $this->getRoles());

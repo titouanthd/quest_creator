@@ -1,0 +1,8 @@
+{# templates/components/alert.html.twig #}
+<div class="alert alert-{{ type }} {% if dismissible %}alert-dismissible{% endif %} fade show">
+    {{ message|raw }}
+    {# If the alert is dismissible, add a close button #}
+    {% if dismissible %}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    {% endif %}
+</div>
