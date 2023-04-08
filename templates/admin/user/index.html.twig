@@ -1,0 +1,45 @@
+{% extends "layouts/admin_layout.html.twig" %}
+
+{% block body %}
+    <h1>User index</h1>
+
+    <a class="btn btn-sm btn-primary" href="{{ path('app_admin_user_new') }}">Create new</a>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Email</th>
+                <th>Roles</th>
+                {# <th>Password</th> #}
+                {# <th>Username</th> #}
+                <th>Created_at</th>
+                {# <th>Updated_at</th> #}
+                {# <th>AvatarName</th> #}
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
+                {# <td>{{ user.password }}</td> #}
+                {# <td>{{ user.username }}</td> #}
+                <td>{{ user.createdAt ? user.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                {# <td>{{ user.updatedAt ? user.updatedAt|date('Y-m-d H:i:s') : '' }}</td> #}
+                {# <td>{{ user.avatarUrl }}</td> #}
+                <td>
+                    <a href="{{ path('app_admin_user_show', {'id': user.id}) }}">show</a>
+                    <a href="{{ path('app_admin_user_edit', {'id': user.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="9">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

@@ -1,7 +1,6 @@
-{% extends 'layouts/base.html.twig' %}
+{% extends 'layouts/login_layout.html.twig' %}
 
-{% block title %}Login
-{% endblock %}
+{% block title %}Login{% endblock %}
 
 {% block body %}
 <div class="container">
@@ -17,17 +16,17 @@
                         <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
                         <div class="mb-3">
                             <label for="inputEmail" class="form-label">Email address</label>
-                            <input type="email" class="form-control" id="inputEmail" name="_username" required>
+                            <input type="email" class="form-control" id="inputEmail" name="email" required>
                         </div>
                         <div class="mb-3">
                             <label for="inputPassword" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="inputPassword" name="_password" required>
+                            <input type="password" class="form-control" id="inputPassword" name="password" required>
                         </div>
                         <div class="row">
                             <div class="col">
                                 <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" id="_remember_mem_switch" name="_remember_me">
-                                    <label class="form-check-label" for="_remember_mem_switch">Remember me</label>
+                                    <input class="form-check-input" type="checkbox" id="_remember_me_switch" name="_remember_me">
+                                    <label class="form-check-label" for="_remember_me_switch">Remember me</label>
                                 </div>
                             </div>
                             <div class="col-auto">

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>
+			{% block title %}{{ page_title }} - Quest Creator{% endblock %}
+		</title>
+		<link
+		rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+		{# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+		{% block stylesheets %}
+			{{ encore_entry_link_tags('app') }}
+		{% endblock %}
+
+		{% block javascripts %}
+			{{ encore_entry_script_tags('app') }}
+		{% endblock %}
+	</head>
+	<body>
+    {% block header %}
+			{% include 'parts/admin/_default_header.html.twig' %}
+		{% endblock %}
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-auto p-3">
+					{% block sidebar %}
+						{% include "parts/admin/_default_sidebar.html.twig" %}
+					{% endblock %}
+				</div>
+				<div class="col bg-light p-3 rounded overflow-auto">
+					{% block body %}{% endblock %}
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,9 @@
+{% extends "layouts/admin_layout.html.twig" %}
+
+{% block body %}
+    <h1>Create new User</h1>
+
+    {{ include('admin/user/_form.html.twig') }}
+
+    <a href="{{ path('app_admin_user_index') }}">back to list</a>
+{% endblock %}

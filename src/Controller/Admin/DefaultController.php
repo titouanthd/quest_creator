@@ -11,7 +11,7 @@ class DefaultController extends AbstractController
     #[Route('/admin/dashboard/', name: 'app_admin_dashboard')]
     public function dashboard(): Response
     {
-        return $this->render('admin/default/dashboard.html.twig', [
+        return $this->render('admin/dashboard.html.twig', [
             'controller_name' => 'DefaultController',
             'page_title' => 'Admin Dashboard',
         ]);

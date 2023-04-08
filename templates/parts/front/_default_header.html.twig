@@ -1,0 +1,55 @@
+<header style="height:51px;">
+	<nav class="navbar navbar-expand-lg fixed-top border-bottom border-light">
+		<div class="container-fluid">
+
+			<div class="col d-flex align-items-center justify-content-start gap-2">
+				<small class="fw-light mb-0">/{{ page_title|lower }}</small>
+			</div>
+
+			<div class="col-auto">
+				<a href="{{ path('app_admin_dashboard')}}" class="navbar-brand fw-bold text-decoration-none">Quest Creator</a>
+			</div>
+
+			<div class="col d-flex position-relative justify-content-end gap-2">
+				{# add link to home #}
+				<a href="{{ path('app_front_home')}}" class="btn btn-sm btn-light">
+					<i class="bi bi-house me-1"></i>
+					Home
+				</a>
+				{% if app.user %}
+					<a href="#" class="btn btn-sm btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+							{{ app.user.username }}
+					</a>
+					<ul class="dropdown-menu dropdown-menu-end mt-1">
+						<li>
+							<a href="{{ path('app_logout')}}" class="dropdown-item" type="button">
+								<i class="bi bi-power me-1"></i>
+								Logout
+							</a>
+						</li>
+						{# if app role is admin #}
+						{% if "ROLE_ADMIN" in app.user.roles %}
+							<li>
+								<a href="{{ path('app_admin_dashboard')}}" class="dropdown-item" type="button">
+									<i class="bi bi-gear me-1"></i>
+									Dashboard
+								</a>
+							</li>
+						{% endif %}
+					</ul>
+				{% else %}
+					<a href="{{ path('app_login')}}" class="btn btn-sm btn-light">
+						<i class="bi bi-person me-1"></i>
+						Login
+					</a>
+					{# register #}
+					<a href="#" class="btn btn-sm btn-light">
+						<i class="bi bi-person-plus me-1"></i>
+						Register
+					</a>
+				{% endif %}
+			</div>
+
+		</div>
+	</nav>
+</header>
