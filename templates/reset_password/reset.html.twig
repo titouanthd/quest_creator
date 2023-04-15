@@ -1,0 +1,36 @@
+{% extends 'layouts/login_layout.html.twig' %}
+
+{% block body %}
+	<h1 class="card-title h3">{{ page_title }}</h1>
+
+	{{ form_start(resetForm) }}
+	{{ form_row(resetForm.plainPassword) }}
+	<button class="btn btn-primary">Reset password</button>
+	{{ form_end(resetForm) }}
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<div class="row vh-100 align-items-center justify-content-center">
+			<div class="col-12 col-md-6 col-lg-5">
+				{% include "parts/_alerts.html.twig" %}
+				<div class="card">
+					<div class="card-header">
+						<h1 class="card-title h3">{{ page_title }}</h1>
+					</div>
+					<div class="card-body">
+						{{ form_start(resetForm) }}
+						{{ form_row(resetForm.plainPassword) }}
+						<button class="btn btn-primary">Reset password</button>
+						{{ form_end(resetForm) }}
+					</div>
+					<div class="card-footer">
+						<a href="{{ path('app_login')}}">
+							Back to login page
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

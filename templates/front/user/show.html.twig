@@ -1,0 +1,51 @@
+{% extends "layouts/front_layout.html.twig" %}
+
+{% block body %}
+<div class="row">
+    <div class="col-12">
+        <h1>User profile {{ app.user.username }}</h1>
+        {# <pre>
+            {{ dump(app.user) }}
+        </pre> #}
+        <table class="table">
+            <tbody>
+                <tr>
+                    <th>Id</th>
+                    <td>{{ app.user.id }}</td>
+                </tr>
+                <tr>
+                    <th>Email</th>
+                    <td>{{ app.user.email }}</td>
+                </tr>
+                <tr>
+                    <th>Roles</th>
+                    <td>{{ app.user.roles ? app.user.roles|json_encode : '' }}</td>
+                </tr>
+                <tr>
+                    <th>Username</th>
+                    <td>{{ app.user.username }}</td>
+                </tr>
+                <tr>
+                    <th>Avatar_url</th>
+                    <td>
+                        <img class="img-fluid" src="{{ app.user.avatarUrl }}" alt="avatar">
+                    </td>
+                </tr>
+                <tr>
+                    <th>Created_at</th>
+                    <td>{{ app.user.createdAt ? app.user.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                </tr>
+                <tr>
+                    <th>Updated_at</th>
+                    <td>{{ app.user.updatedAt ? app.user.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <a href="{{ path('app_front_user_edit', {id: app.user.id}) }}" class="btn btn-sm btn-primary">
+            <i class="bi bi-pencil me-1"></i>
+            Edit
+        </a>
+    </div>
+</div>
+{% endblock %}

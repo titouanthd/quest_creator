@@ -3,14 +3,13 @@
 namespace App\Controller\Admin;
 
 use App\Entity\User;
-use App\Form\UserType;
+use App\Form\Admin\UserType;
 use App\Repository\UserRepository;
-use App\Service\FileUploader;
-use App\Service\FileUploaderService;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 #[Route('/admin/user')]
 class UserController extends AbstractController
@@ -25,13 +24,19 @@ class UserController extends AbstractController
     }
 
     #[Route('/new', name: 'app_admin_user_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, UserRepository $userRepository): Response
+    public function new(Request $request, UserRepository $userRepository, UserPasswordHasherInterface $hasher): Response
     {
         $user = new User();
+        $created_at = new \DateTimeImmutable();
+        $user->setCreatedAt($created_at);
+        $user->setUpdatedAt($created_at);
+
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // we need to hash the password
+            $user->setPassword($hasher->hashPassword($user, $user->getPassword()));
             $userRepository->save($user, true);
 
             return $this->redirectToRoute('app_admin_user_index', [], Response::HTTP_SEE_OTHER);

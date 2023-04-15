@@ -1,5 +1,5 @@
-<header style="height:51px;">
-	<nav class="navbar navbar-expand-lg fixed-top border-bottom border-light bg-white">
+<header style="height:57px;">
+	<nav style="background:white;" class="navbar navbar-expand-lg fixed-top border-bottom border-light">
 		<div class="container-fluid">
 
 			<div class="col d-flex align-items-center justify-content-start gap-2">
@@ -10,7 +10,10 @@
 			</div>
 
 			<div class="col-auto">
-				<a href="{{ path('app_admin_dashboard')}}" class="navbar-brand fw-bold text-decoration-none">Quest Creator</a>
+				<a href="{{ path('app_admin_dashboard')}}" class="navbar-brand d-flex align-items-center flex-nowrap fw-bold text-decoration-none">
+					<img style="max-height:25px;" class="img-fluid me-1" src="/uploads/quest_creator_logo.svg" alt="logo reduced">
+					Quest Creator
+				</a>
 			</div>
 
 			<div class="col d-flex position-relative justify-content-end gap-2">

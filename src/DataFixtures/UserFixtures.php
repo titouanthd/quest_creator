@@ -28,9 +28,11 @@ class UserFixtures extends Fixture
         $admin->setPassword($password);
         $role = ['ROLE_ADMIN'];
         $admin->setRoles($role);
-        $date = new \DateTime();
+        $date = new \DateTimeImmutable();
         $admin->setCreatedAt($date);
         $admin->setUpdatedAt($date);
+        $admin->setAvatarUrl('https://picsum.photos/150/150');
+
         // persist the user
         $manager->persist($admin);
         // add ref
@@ -50,6 +52,8 @@ class UserFixtures extends Fixture
             $date = new \DateTime();
             $user->setCreatedAt($date);
             $user->setUpdatedAt($date);
+            // set avatar url
+            $user->setAvatarUrl('https://randomuser.me/api/portraits/lego/'.$i.'.jpg');
             $manager->persist($user);
             $this->addReference('user'.$i, $user);
             echo 'User '.$i.' created successfully!'.PHP_EOL;

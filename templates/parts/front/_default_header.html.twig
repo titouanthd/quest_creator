@@ -1,13 +1,15 @@
-<header style="height:51px;">
-	<nav class="navbar navbar-expand-lg fixed-top border-bottom border-light">
+<header style="min-height:57px;">
+	<nav style="background:white;" class="navbar navbar-expand-lg fixed-top border-bottom border-light">
 		<div class="container-fluid">
-
 			<div class="col d-flex align-items-center justify-content-start gap-2">
 				<small class="fw-light mb-0">/{{ page_title|lower }}</small>
 			</div>
 
-			<div class="col-auto">
-				<a href="{{ path('app_admin_dashboard')}}" class="navbar-brand fw-bold text-decoration-none">Quest Creator</a>
+			<div class="col">
+				<a href="{{ path('app_front_home')}}" class="navbar-brand d-flex justify-content-center align-items-center flex-nowrap fw-bold text-decoration-none">
+					<img style="max-height:25px;" class="img-fluid me-1" src="/uploads/quest_creator_logo.svg" alt="logo reduced">
+					Quest Creator
+				</a>
 			</div>
 
 			<div class="col d-flex position-relative justify-content-end gap-2">
@@ -22,20 +24,26 @@
 					</a>
 					<ul class="dropdown-menu dropdown-menu-end mt-1">
 						<li>
-							<a href="{{ path('app_logout')}}" class="dropdown-item" type="button">
-								<i class="bi bi-power me-1"></i>
-								Logout
+							<a href="{{ path('app_front_user_show')}}" class="dropdown-item" type="button">
+								<i class="bi bi-person me-1"></i>
+								Profile
 							</a>
 						</li>
 						{# if app role is admin #}
 						{% if "ROLE_ADMIN" in app.user.roles %}
 							<li>
-								<a href="{{ path('app_admin_dashboard')}}" class="dropdown-item" type="button">
+								<a href="{{ path('app_admin_dashboard')}}" class="dropdown-item text-danger" type="button">
 									<i class="bi bi-gear me-1"></i>
 									Dashboard
 								</a>
 							</li>
 						{% endif %}
+						<li>
+							<a href="{{ path('app_logout')}}" class="dropdown-item" type="button">
+								<i class="bi bi-power me-1"></i>
+								Logout
+							</a>
+						</li>
 					</ul>
 				{% else %}
 					<a href="{{ path('app_login')}}" class="btn btn-sm btn-light">

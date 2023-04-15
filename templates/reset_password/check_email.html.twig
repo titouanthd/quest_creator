@@ -1,0 +1,31 @@
+{% extends 'layouts/login_layout.html.twig' %}
+
+
+{% block body %}
+	<div class="container">
+		<div class="row vh-100 align-items-center justify-content-center">
+			<div class="col-12 col-md-6 col-lg-5">
+				{% include "parts/_alerts.html.twig" %}
+				<div class="card">
+					<div class="card-header">
+						<h1 class="card-title h3">Password Reset Email Sent</h1>
+					</div>
+					<div class="card-body">
+						<p>
+							If an account matching your email exists, then an email was just sent that contains a link that you can use to reset your password.
+							        This link will expire in
+							{{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}.
+						</p>
+						<p>If you don't receive an email please check your spam folder or
+							<a href="{{ path('app_forgot_password_request') }}">try again</a>.</p>
+					</div>
+					<div class="card-footer">
+						<a href="{{ path('app_login')}}">
+							Back to login page
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

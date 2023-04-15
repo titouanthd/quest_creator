@@ -1,0 +1,44 @@
+{% extends 'layouts/login_layout.html.twig' %}
+
+{% block title %}Reset your password
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<div class="row vh-100 align-items-center justify-content-center">
+			<div class="col-12 col-md-6 col-lg-5">
+				{% include "parts/_alerts.html.twig" %}
+				<div class="card">
+					<div class="card-header">
+						<h1 class="card-title h3">Reset your password</h1>
+					</div>
+					<div
+						class="card-body">
+						{# 
+                            {% for flash_error in app.flashes('reset_password_error') %}
+						        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+						    {% endfor %}
+						    <h1>Reset your password</h1> 
+                        #}
+
+						{{ form_start(requestForm) }}
+						{{ form_row(requestForm.email) }}
+						<div>
+							<small>
+								Enter your email address and we will send you a link to reset your password.
+							</small>
+						</div>
+
+						<button class="btn btn-primary">Send password reset email</button>
+						{{ form_end(requestForm) }}
+					</div>
+					<div class="card-footer">
+						<a href="{{ path('app_login')}}">
+                            Back to login page
+                        </a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

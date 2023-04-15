@@ -26,6 +26,10 @@
                 <td>{{ user.username }}</td>
             </tr>
             <tr>
+                <th>Avatar_url</th>
+                <td>{{ user.avatarUrl }}</td>
+            </tr>
+            <tr>
                 <th>Created_at</th>
                 <td>{{ user.createdAt ? user.createdAt|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
@@ -33,16 +37,17 @@
                 <th>Updated_at</th>
                 <td>{{ user.updatedAt ? user.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
-            {# <tr>
-                <th>Avatar_name</th>
-                <td>{{ user.avatarUrl }}</td>
-            </tr> #}
         </tbody>
     </table>
 
-    <a href="{{ path('app_admin_user_index') }}">back to list</a>
+    <a href="{{ path('app_admin_user_index') }}"class="btn btn-sm btn-secondary">
+        back to list
+    </a>
 
-    <a href="{{ path('app_admin_user_edit', {'id': user.id}) }}">edit</a>
+    <a href="{{ path('app_admin_user_edit', {'id': user.id}) }}" class="btn btn-sm btn-primary">
+        <i class="bi bi-save me-1"></i>
+        edit
+    </a>
 
     {{ include('admin/user/_delete_form.html.twig') }}
 {% endblock %}

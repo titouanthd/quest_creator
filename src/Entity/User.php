@@ -35,33 +35,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $username = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $created_at = null;
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $createdAt = null;
 
-    /**
-     * NOTE: This is not a mapped field of entity metadata, just a simple property.
-     *
-     * @Vich\UploadableField(mapping="products", fileNameProperty="imageName", size="imageSize")
-     */
-    private ?File $imageFile;
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $updatedAt = null;
 
-    /**
-     * @ORM\Column(nullable="true")
-     */
-    private ?string $imageName = null;
-
-    /**
-     * @ORM\Column(nullable="true")
-     */
-    private ?int $imageSize = null;
-
-    #[ORM\Embedded(class: 'Vich\UploaderBundle\Entity\File')]
-    private ?EmbeddedFile $image = null;
-
-    /**
-     * @ORM\Column(nullable="true")
-     */
-    private ?\DateTimeImmutable $updatedAt = null;
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $avatarUrl = null;
 
     public function getId(): ?int
     {
@@ -147,12 +128,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function getCreatedAt(): ?\DateTimeInterface
     {
-        return $this->created_at;
+        return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeInterface $created_at): self
+    public function setCreatedAt(?\DateTimeInterface $createdAt): self
     {
-        $this->created_at = $created_at;
+        $this->createdAt = $createdAt;
 
         return $this;
     }
@@ -169,66 +150,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function setImageName(?string $imageName): void
+    public function getAvatarUrl(): ?string
     {
-        $this->imageName = $imageName;
+        return $this->avatarUrl;
     }
 
-    public function getImageName(): ?string
+    public function setAvatarUrl(?string $avatarUrl): self
     {
-        return $this->imageName;
-    }
+        $this->avatarUrl = $avatarUrl;
 
-    public function setImageSize(?int $imageSize): void
-    {
-        $this->imageSize = $imageSize;
-    }
-
-    public function getImageSize(): ?int
-    {
-        return $this->imageSize;
-    }
-
-    /**
-     * If manually uploading a file (i.e. not using Symfony Form) ensure an instance
-     * of 'UploadedFile' is injected into this setter to trigger the update. If this
-     * bundle's configuration parameter 'inject_on_load' is set to 'true' this setter
-     * must be able to accept an instance of 'File' as the bundle will inject one here
-     * during Doctrine hydration.
-     *
-     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile|null $imageFile
-     */
-    public function setImageFile(?File $imageFile = null): void
-    {
-        $this->imageFile = $imageFile;
-
-        if (null !== $imageFile) {
-            // It is required that at least one field changes if you are using doctrine
-            // otherwise the event listeners won't be called and the file is lost
-            $this->updatedAt = new \DateTimeImmutable();
-        }
-    }
-
-    public function getImageFile(): ?File
-    {
-        return $this->imageFile;
-    }
-
-    public function setImage(EmbeddedFile $image): void
-    {
-        $this->image = $image;
-    }
-
-    public function getImage(): ?EmbeddedFile
-    {
-        return $this->image;
-    }
-
-    /**
-     * isAdmin checks if the user is an admin
-     */
-    public function isAdmin(): bool
-    {
-        return in_array('ROLE_ADMIN', $this->getRoles());
+        return $this;
     }
 }
