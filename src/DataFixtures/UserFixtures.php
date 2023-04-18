@@ -19,7 +19,7 @@ class UserFixtures extends Fixture
     public function load(ObjectManager $manager): void
     {
         // echo start fixture message
-        echo 'Creating user fixtures...'.PHP_EOL;
+        echo 'Loading UserFixtures...'.PHP_EOL;
 
         $admin = new User();
         $admin->setEmail('titou@admin.local');
@@ -49,7 +49,7 @@ class UserFixtures extends Fixture
             $user->setPassword($password);
             $role = ['ROLE_USER'];
             $user->setRoles($role);
-            $date = new \DateTime();
+            $date = new \DateTimeImmutable();
             $user->setCreatedAt($date);
             $user->setUpdatedAt($date);
             // set avatar url
@@ -61,6 +61,6 @@ class UserFixtures extends Fixture
 
         $manager->flush();
         // echo end fixture message
-        echo 'User fixtures created successfully!'.PHP_EOL;
+        echo "UserFixtures ended successfuly!".PHP_EOL;
     }
 }

@@ -1,0 +1,36 @@
+{% extends "layouts/front_layout.html.twig" %}
+
+
+{% block body %}
+  <h1>{{ page_title }}</h1>
+  <div class="overflow-auto">
+    <table class="table">
+      <tbody>
+        <tr>
+          <th>Id</th>
+          <td>{{ universe.id }}</td>
+        </tr>
+        <tr>
+          <th>Name</th>
+          <td>{{ universe.name }}</td>
+        </tr>
+        <tr>
+          <th>Slug</th>
+          <td>{{ universe.slug }}</td>
+        </tr>
+        <tr>
+          <th>Worlds</th>
+          <td>
+            {% for world in universe.worlds %}
+              <a href="{{ path('app_front_world_show', {'id': world.id}) }}">{{ world.name }}</a>
+            {% endfor %}
+          </td>
+        </tr>
+        <tr>
+          <th>Created_at</th>
+          <td>{{ universe.createdAt ? universe.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+{% endblock %}

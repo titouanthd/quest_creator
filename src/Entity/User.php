@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -35,14 +37,22 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $username = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, options: ['default' => 'now()'])]
     private ?\DateTimeInterface $createdAt = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $updatedAt = null;
+    #[ORM\Column(nullable: true)]
+    private ?\DateTimeImmutable $updatedAt = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $avatarUrl = null;
+
+    #[ORM\OneToMany(mappedBy: 'author', targetEntity: Universe::class)]
+    private Collection $universes;
+
+    public function __construct()
+    {
+        $this->universes = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -158,6 +168,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setAvatarUrl(?string $avatarUrl): self
     {
         $this->avatarUrl = $avatarUrl;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Universe>
+     */
+    public function getUniverses(): Collection
+    {
+        return $this->universes;
+    }
+
+    public function addUniverse(Universe $universe): self
+    {
+        if (!$this->universes->contains($universe)) {
+            $this->universes->add($universe);
+            $universe->setAuthor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUniverse(Universe $universe): self
+    {
+        if ($this->universes->removeElement($universe)) {
+            // set the owning side to null (unless already changed)
+            if ($universe->getAuthor() === $this) {
+                $universe->setAuthor(null);
+            }
+        }
 
         return $this;
     }

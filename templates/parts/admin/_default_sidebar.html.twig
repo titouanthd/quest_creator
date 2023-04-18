@@ -3,13 +3,13 @@
 	<div class="row g-0">
 		<div class="col-auto pe-0">
 			<div class="d-flex flex-column">
-				<a href="{{ path('app_front_home') }}" class="btn btn-sm mb-1 {% if 'app_front_home' in current_route %}active{% endif %}">
+				<a href="{{ path('app_front_home') }}" class="btn btn-light btn-sm mb-1 {% if 'app_front_home' in current_route %}active{% endif %}">
 					<i class="bi bi-house"></i>
 				</a>
-				<a href="{{ path('app_admin_dashboard') }}" class="btn btn-sm mb-1 {% if 'app_admin_dashboard' in current_route %}active{% endif %}">
+				<a href="{{ path('app_admin_dashboard') }}" class="btn btn-light btn-sm mb-1 {% if 'app_admin_dashboard' in current_route %}active{% endif %}">
 					<i class="bi bi-speedometer2"></i>
 				</a>
-        <a href="" class="btn btn-sm mb-1 dropdown-toggle {% if 'app_admin_user' in current_route %}active{% endif %}" data-bs-toggle="dropdown" id="dropdownUserMenu" aria-expanded="false">
+        <a href="" class="btn btn-light btn-sm mb-1 dropdown-toggle {% if 'app_admin_user' in current_route %}active{% endif %}" data-bs-toggle="dropdown" id="dropdownUserMenu" aria-expanded="false">
 					<i class="bi bi-person"></i>
 				</a>
         <ul class="dropdown-menu dropdown-menu-end mt-1" aria-labelledby="dropdownUserMenu">
@@ -26,19 +26,19 @@
         </ul>
 			</div>
 		</div>
-		<div class="col ps-1 px-0 collapse collapse-horizontal" id="sidebarLabels">
+		<div class="col ps-1 px-0 collapse collapse-horizontal show" id="sidebarLabels">
 			<div class="d-flex flex-column align-items-start">
-				<a href="{{ path('app_front_home') }}" class="btn btn-sm mb-1 text-nowrap {% if 'app_front_home' in current_route %}active{% endif %}">
+				<a href="{{ path('app_front_home') }}" class="btn btn-sm mb-1 text-nowrap">
 					<span>Back to front</span>
 				</a>
 			</div>
 			<div class="d-flex flex-column align-items-start">
-				<a href="{{ path('app_admin_dashboard') }}" class="btn btn-sm mb-1 text-nowrap {% if 'app_admin_dashboard' in current_route %}active{% endif %}">
+				<a href="{{ path('app_admin_dashboard') }}" class="btn btn-sm mb-1 text-nowrap">
 					<span>Dashboard</span>
 				</a>
 			</div>
       <div class="d-flex flex-column align-items-start">
-				<a href="{{ path('app_admin_user_index') }}" class="btn btn-sm mb-1 text-nowrap {% if 'app_admin_user' in current_route %}active{% endif %}">
+				<a href="{{ path('app_admin_user_index') }}" class="btn btn-sm mb-1 text-nowrap">
 					<span>Users</span>
 				</a>
 			</div>

@@ -10,12 +10,12 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 class FileUploader
 {
     public function __construct(
-        private $targetDirectory,
+        private $uploadDirectory,
         private SluggerInterface $slugger,
     ) {
     }
 
-    public function upload(UploadedFile $file, string $subfolder): string
+    public function upload(UploadedFile $file): string
     {
         $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
         $safeFilename = $this->slugger->slug($originalFilename);
@@ -32,6 +32,6 @@ class FileUploader
 
     public function getTargetDirectory(): string
     {
-        return $this->targetDirectory;
+        return $this->uploadDirectory;
     }
 }

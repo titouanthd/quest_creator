@@ -1,0 +1,36 @@
+{% extends "layouts/front_layout.html.twig" %}
+
+
+{% block body %}
+  <h1>{{ page_title }}</h1>
+  <div class="overflow-auto">
+    <table class="table">
+      <tbody>
+        <tr>
+          <th>Id</th>
+          <td>{{ world.id }}</td>
+        </tr>
+        <tr>
+          <th>Name</th>
+          <td>{{ world.name }}</td>
+        </tr>
+        <tr>
+          <th>Slug</th>
+          <td>{{ world.slug }}</td>
+        </tr>
+        <tr>
+          <th>Maps</th>
+          <td>
+            {% for map in world.maps %}
+              <a href="#">{{ map.name }}</a>
+            {% endfor %}
+          </td>
+        </tr>
+        <tr>
+          <th>Created_at</th>
+          <td>{{ world.createdAt ? world.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+{% endblock %}

@@ -1,8 +1,5 @@
 <?php
 
-// use Doctrine\ORM\EntityManagerInterface;
-// use Symfony\Component\HttpFoundation\Request;
-// use Symfony\Component\HttpFoundation\Response;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class OpenAIService
@@ -22,7 +19,7 @@ class OpenAIService
    * @param  string $context
    * @return string
    */
-  public function sendRequestToOpenAI(string $prompt, string $context): string
+  public function getGPTResponse(string $prompt, string $context): string
   {
     $base_prompt = "";
     $prompt = $base_prompt . $prompt;
@@ -53,7 +50,7 @@ class OpenAIService
       ]
     );
 
-    dd($response->toArray());
+    // dd($response->toArray());
 
     // check if the response is successful
     if ($response->getStatusCode() === 200) {

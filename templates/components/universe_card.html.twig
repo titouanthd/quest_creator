@@ -1,0 +1,13 @@
+<div{{ attributes }}>
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">{{this.universe.name}}</h3>
+        </div>
+        <div class="card-body">
+            <p class="mb-0">Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque, voluptates. Quasi magni blanditiis eaque dolores, quam nisi culpa dignissimos praesentium. Beatae provident neque eum ullam velit quia ut sint laboriosam.</p>
+        </div>
+        <div class="card-footer">
+            <a href="{{ path('app_front_universe_show', {id: this.universe.id}) }}" class="btn btn-sm btn-primary">View Universe</a>
+        </div>
+    </div>
+</div>
