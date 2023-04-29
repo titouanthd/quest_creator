@@ -1,0 +1,8 @@
+{% extends "layouts/front_layout.html.twig" %}
+
+{% block body %}
+    <h1>Edit World</h1>
+    <a class="btn btn-sm btn-secondary" href="{{ path('app_front_world_show', {id:  world.id}) }}">Back to show</a>
+
+    {{ include('front/world/_form.html.twig', {'button_label': 'Update'}) }}
+{% endblock %}

@@ -5,51 +5,51 @@ namespace App\Controller\Front;
 use App\Entity\User;
 use App\Form\Front\UserType;
 use App\Repository\UserRepository;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
+#[Route('/app/user')]
 class UserController extends AbstractController
 {
-    // new route to display user profile
-    #[Route('/profile', name: 'app_front_user_show')]
-    public function show(): Response
+    #[Route('/{id}', name: 'app_front_user_show', methods: ['GET'])]
+    public function show(User $user): Response
     {
+        // every body can see the user profile
         return $this->render('front/user/show.html.twig', [
-            'controller_name' => 'DefaultController',
-            'page_title' => 'Show profile',
+            'user' => $user,
+            'page_title' => 'Show user',
         ]);
     }
 
-    // new route to edit user profile
-    #[Route('/profile/edit/{id}', name: 'app_front_user_edit')]
-    public function editProfile(User $user, Request $request, UserRepository $ur): Response
+    #[Route('/{id}/edit', name: 'app_front_user_edit', methods: ['GET', 'POST'])]
+    public function edit(Request $request, User $user, UserRepository $userRepository): Response
     {
+        // only the user can edit his profile
+        if ($user !== $this->getUser()) {
+            throw $this->createAccessDeniedException();
+        }
+
         $form = $this->createForm(UserType::class, $user);
-
         $form->handleRequest($request);
-        // handle the form submission
+
         if ($form->isSubmitted() && $form->isValid()) {
-            $data = $form->getData();
-            // set update at
-            $user->setUpdatedAt(new \DateTimeImmutable());
-            // set username
-            $user->setUsername($data->getUsername());
+            $date = new \DateTime();
+            $user->setUpdatedAt($date);
+            
+            $userRepository->save($user, true);
 
-            $ur->save($user, true);
+            // add a flash message
+            $this->addFlash('success', 'The user has been updated');
 
-            // add flash message
-            $this->addFlash('success', 'Profile updated successfully');
-
-            // redirect to the profile page
-            return $this->redirectToRoute('app_front_user_show');
+            return $this->redirectToRoute('app_front_user_show', ["id" => $user->getId()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('front/user/edit.html.twig', [
-            'controller_name' => 'DefaultController',
-            'page_title' => 'Edit Profile',
-            'form' => $form->createView(),
+            'user' => $user,
+            'form' => $form,
+            'page_title' => 'Edit user',
         ]);
     }
 }

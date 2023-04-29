@@ -14,11 +14,10 @@ class WorldFixtures extends Fixture implements DependentFixtureInterface
     {
         // echo start message
         echo "Loading WorldFixtures...".PHP_EOL;
-        $date = new \DateTimeImmutable();
+        $date = new \DateTime();
         $universe1 = $this->getReference('universe1');
         $world = new World();
         $world->setName('World 1');
-        $world->setSlug('world-1');
         $world->setUniverse($universe1);
         $world->setCreatedAt($date);
         $world->setUpdatedAt($date);
@@ -29,7 +28,6 @@ class WorldFixtures extends Fixture implements DependentFixtureInterface
             $random_universe_ref = $this->getReference('universe'.rand(1, 100));
             $world = new World();
             $world->setName('World '.$i);
-            $world->setSlug('world-'.$i);
             $world->setUniverse($random_universe_ref);
             $world->setCreatedAt($date);
             $world->setUpdatedAt($date);

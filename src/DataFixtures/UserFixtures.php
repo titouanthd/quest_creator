@@ -28,7 +28,7 @@ class UserFixtures extends Fixture
         $admin->setPassword($password);
         $role = ['ROLE_ADMIN'];
         $admin->setRoles($role);
-        $date = new \DateTimeImmutable();
+        $date = new \DateTime();
         $admin->setCreatedAt($date);
         $admin->setUpdatedAt($date);
         $admin->setAvatarUrl('https://picsum.photos/150/150');
@@ -49,7 +49,7 @@ class UserFixtures extends Fixture
             $user->setPassword($password);
             $role = ['ROLE_USER'];
             $user->setRoles($role);
-            $date = new \DateTimeImmutable();
+            $date = new \DateTime();
             $user->setCreatedAt($date);
             $user->setUpdatedAt($date);
             // set avatar url

@@ -15,13 +15,12 @@ class UniverseFixtures extends Fixture implements DependentFixtureInterface
         // echo start fixture message
         echo 'Loading UniverseFixtures...'.PHP_EOL;
         $admin_ref = $this->getReference('admin');
-        $date = new \DateTimeImmutable();
+        $date = new \DateTime();
         for ( $i = 1 ; $i <= 100 ; $i++ ) {
             // for the first 2 universes, set the author to the admin
             if ( $i < 3 ) {
                 $universe = new Universe();
                 $universe->setName('Universe '.$i);
-                $universe->setSlug('universe-'.$i);
                 $universe->setAuthor($admin_ref);
                 $universe->setCreatedAt($date);
                 $universe->setUpdatedAt($date);
@@ -32,7 +31,6 @@ class UniverseFixtures extends Fixture implements DependentFixtureInterface
                 $random_user_ref = $this->getReference('user'.rand(1, 50));
                 $universe = new Universe();
                 $universe->setName('Universe '.$i);
-                $universe->setSlug('universe-'.$i);
                 $universe->setCreatedAt($date);
                 $universe->setUpdatedAt($date);
                 $universe->setAuthor($random_user_ref);

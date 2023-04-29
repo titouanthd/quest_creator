@@ -1,4 +1,6 @@
-{% extends "layouts/front_layout.html.twig" %}
+<!DOCTYPE html>
+
+<title>User</title>
 
 {% block body %}
     <h1>User</h1>
@@ -17,17 +19,13 @@
                 <th>Roles</th>
                 <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
             </tr>
-            {# <tr>
+            <tr>
                 <th>Password</th>
                 <td>{{ user.password }}</td>
-            </tr> #}
+            </tr>
             <tr>
                 <th>Username</th>
                 <td>{{ user.username }}</td>
-            </tr>
-            <tr>
-                <th>AvatarUrl</th>
-                <td>{{ user.avatarUrl }}</td>
             </tr>
             <tr>
                 <th>CreatedAt</th>
@@ -37,14 +35,16 @@
                 <th>UpdatedAt</th>
                 <td>{{ user.updatedAt ? user.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
+            <tr>
+                <th>AvatarUrl</th>
+                <td>{{ user.avatarUrl }}</td>
+            </tr>
         </tbody>
     </table>
 
-    {# show only if user is current user #}
-    {% if app.user.id == user.id %}
-        <a class="btn btn-sm btn-primary" href="{{ path('app_front_user_edit', {'id': user.id}) }}">Edit</a>
-    {% endif %}
+    <a href="{{ path('app_user_index') }}">Back to list</a>
 
-    {# link change password request #}
-    <a class="btn btn-sm btn-secondary" href="{{ path('app_forgot_password_request') }}">Change password request</a>
+    <a href="{{ path('app_user_edit', {'id': user.id}) }}">Edit</a>
+
+    {{ include('user/_delete_form.html.twig') }}
 {% endblock %}

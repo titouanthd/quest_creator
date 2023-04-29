@@ -4,10 +4,10 @@ namespace App\Entity;
 
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use App\Repository\MapRepository;
+use App\Repository\BiomeRepository;
 
-#[ORM\Entity(repositoryClass: MapRepository::class)]
-class Map
+#[ORM\Entity(repositoryClass: BiomeRepository::class)]
+class Biome
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -17,16 +17,10 @@ class Map
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
-    #[ORM\Column]
-    private ?int $width = null;
-
-    #[ORM\Column]
-    private ?int $height = null;
-
     #[ORM\Column(length: 255)]
-    private ?string $size = null;
+    private ?string $color = null;
 
-    #[ORM\ManyToOne(inversedBy: 'maps')]
+    #[ORM\ManyToOne(inversedBy: 'biomes')]
     private ?World $world = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
@@ -40,42 +34,6 @@ class Map
         return $this->id;
     }
 
-    public function getWidth(): ?int
-    {
-        return $this->width;
-    }
-
-    public function setWidth(int $width): self
-    {
-        $this->width = $width;
-
-        return $this;
-    }
-
-    public function getHeight(): ?int
-    {
-        return $this->height;
-    }
-
-    public function setHeight(int $height): self
-    {
-        $this->height = $height;
-
-        return $this;
-    }
-
-    public function getSize(): ?string
-    {
-        return $this->size;
-    }
-
-    public function setSize(string $size): self
-    {
-        $this->size = $size;
-
-        return $this;
-    }
-
     public function getName(): ?string
     {
         return $this->name;
@@ -84,6 +42,18 @@ class Map
     public function setName(string $name): self
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    public function getColor(): ?string
+    {
+        return $this->color;
+    }
+
+    public function setColor(string $color): self
+    {
+        $this->color = $color;
 
         return $this;
     }

@@ -1,0 +1,9 @@
+{% extends "layouts/front_layout.html.twig" %}
+
+{% block body %}
+    <h1>Create new Universe</h1>
+    <a class="btn btn-sm btn-secondary" href="{{ path('app_front_universe_index') }}">Back to list</a>
+
+    {{ include('front/universe/_form.html.twig') }}
+
+{% endblock %}

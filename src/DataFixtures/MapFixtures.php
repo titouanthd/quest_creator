@@ -14,11 +14,10 @@ class MapFixtures extends Fixture implements DependentFixtureInterface
     {
         // echo start message
         echo "Loading MapFixtures...".PHP_EOL;
-        $date = new \DateTimeImmutable();
+        $date = new \DateTime();
         $random_world_ref = $this->getReference('world'.rand(1, 1000));
         $map = new Map();
         $map->setName('Map 1');
-        $map->setSlug('map-1');
         $map->setWidth(rand(100, 1000));
         $map->setHeight(rand(100, 1000));
         $map->setSize('small');
@@ -31,7 +30,6 @@ class MapFixtures extends Fixture implements DependentFixtureInterface
         for ( $i = 2 ; $i <= 1000 ; $i++ ) {
             $map = new Map();
             $map->setName('Map '.$i);
-            $map->setSlug('map-'.$i);
             $map->setWidth(rand(100, 1000));
             $map->setHeight(rand(100, 1000));
             $map->setCreatedAt($date);

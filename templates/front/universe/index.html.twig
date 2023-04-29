@@ -1,13 +1,31 @@
 {% extends "layouts/front_layout.html.twig" %}
 
 {% block body %}
-<h1>{{ page_title }}</h1>
-
-<div class="row g-3">
-    {% for universe in universes %}
-        <div class="col-12">
-            {{ component('universe_card', {'universe': universe}) }}
-        </div>
-    {% endfor %}
-</div>
+    <h1>Universe index</h1>
+    <a class="btn btn-sm btn-primary" href="{{ path('app_front_universe_new') }}">Create new</a>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>UpdatedAt</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for universe in universes %}
+            <tr>
+                <td>{{ universe.name }}</td>
+                <td>{{ universe.updatedAt ? universe.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_front_universe_show', {'id': universe.id}) }}">show</a>
+                    <a href="{{ path('app_front_universe_edit', {'id': universe.id}) }}">Edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 {% endblock %}

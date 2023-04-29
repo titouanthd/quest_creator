@@ -18,9 +18,6 @@ class World
 
     #[ORM\Column(length: 255)]
     private ?string $name = null;
-    
-    #[ORM\Column(length: 255)]
-    private ?string $slug = null;
 
     #[ORM\ManyToOne(inversedBy: 'worlds')]
     private ?Universe $universe = null;
@@ -28,15 +25,19 @@ class World
     #[ORM\OneToMany(mappedBy: 'world', targetEntity: Map::class)]
     private Collection $maps;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE, options: ['default' => 'now()'])]
+    #[ORM\OneToMany(mappedBy: 'world', targetEntity: Biome::class)]
+    private Collection $biomes;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $createdAt = null;
 
-    #[ORM\Column(nullable: true)]
-    private ?\DateTimeImmutable $updatedAt = null;
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    private ?\DateTimeInterface $updatedAt = null;
 
     public function __construct()
     {
         $this->maps = new ArrayCollection();
+        $this->biomes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -98,6 +99,36 @@ class World
         return $this;
     }
 
+    /**
+     * @return Collection<int, Biome>
+     */
+    public function getBiomes(): Collection
+    {
+        return $this->biomes;
+    }
+
+    public function addBiome(Biome $biome): self
+    {
+        if (!$this->biomes->contains($biome)) {
+            $this->biomes->add($biome);
+            $biome->setWorld($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBiome(Biome $biome): self
+    {
+        if ($this->biomes->removeElement($biome)) {
+            // set the owning side to null (unless already changed)
+            if ($biome->getWorld() === $this) {
+                $biome->setWorld(null);
+            }
+        }
+
+        return $this;
+    }
+
     public function getCreatedAt(): ?\DateTimeInterface
     {
         return $this->createdAt;
@@ -115,21 +146,9 @@ class World
         return $this->updatedAt;
     }
 
-    public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
+    public function setUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
-
-        return $this;
-    }
-
-    public function getSlug(): ?string
-    {
-        return $this->slug;
-    }
-
-    public function setSlug(string $slug): self
-    {
-        $this->slug = $slug;
 
         return $this;
     }

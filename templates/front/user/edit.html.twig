@@ -1,22 +1,7 @@
 {% extends "layouts/front_layout.html.twig" %}
 
 {% block body %}
-<div class="row">
-	<div class="col-12">
-			<h1>Edit User {{ app.user.username }}</h1>
+    <h1>Edit User</h1>
 
-			{{ include('front/user/_form.html.twig', {'button_label': 'Update'}) }}
-
-			{# reset password link #}
-			<a href="{{ path('app_forgot_password_request') }}"class="btn btn-sm btn-light my-2">
-				<i class="bi bi-key me-1"></i>
-				Reset password
-			</a>
-
-			<a href="{{ path('app_front_user_show') }}"class="btn btn-sm btn-secondary">
-				<i class="bi bi-person me-1"></i>
-				Back to profile
-			</a>
-	</div>
-</div>
+    {{ include('front/user/_form.html.twig', {'button_label': 'Update'}) }}
 {% endblock %}
